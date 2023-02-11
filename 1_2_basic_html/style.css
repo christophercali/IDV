@@ -18,3 +18,15 @@ h3 {
 p {
   font-size: 1em;
 }
+
+td{
+  padding:8px;
+}
+th{
+  padding:8px;
+  background-color: rgb(184, 136, 136);
+}
+
+.topRow{
+  background-color: rgb(184, 136, 136);
+}

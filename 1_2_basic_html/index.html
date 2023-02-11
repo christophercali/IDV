@@ -1,19 +1,94 @@
+<!-- - [ ] Make your own [HTML table](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics) with different data, either real or made up. For full credit, this table **must**:
+  - [ ] have at least one more column than the sample code.
+  - [ ] include a class name that is relevant to the table AND changes something about the style of a cell, cells, row, or rows.
+- [ ] Add rectangles to your svg. For reference you should use the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/rect) for svg rectangles.  
+- [ ] Push these changes up to your forked repository. You should see your commit and any code changes in the github repo. Confirm that you see your changes in the deployed site. Follow the details outlined in the [deploy and submit below](#deploy--submit) to recieve credit.
+
+**BONUS:**
+
+- [ ] Add a path to your SVG. Use the [MDN documentation on paths](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) to help you build a function to illustrate those paths. 
+- [ ] Add an image to your page using [image tags](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) (`<img />`). 
+- [ ] Add a [button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) or [input](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) to your page.  -->
+
 
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Interactive Data Visualization Tutorial</title>
+  <title>Creating a Beautiful Kitchen Table</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <h1>Hello World!</h1>
-  <h3>Tutorial Assignment: 1_2_basic_html </h3>
+  <h1>A Kitchen Table</h1>
+  <h3>What is most important?</h3>
   <table>
-    <!-- Add your table data here -->
+    <tr class="topRow">
+      <th>Category/Importance Level</th>
+      <td>Foods</td>
+      <td>Utensils</td>
+      <td>Eating Vessels</td>
+      <td>Decorum</td>
+      <td>Additional Needs</td>
+    </tr>
+    <tr>
+      <th>Most Important</th>
+      <td>Lasagna</td>
+      <td>Fork</td>
+      <td>Large Plate</td>
+      <td>Candle</td>
+      <td>Good Vibes</td>
+    </tr>
+    <tr>
+      <th>Very Important</th>
+      <td>Chicken</td>
+      <td>Knife</td>
+      <td>Cup</td>
+      <td>Vase with Flowers</td>
+      <td>Napkins</td>
+    </tr>
+    <tr>
+      <th>Important</th>
+      <td>Broccoli</td>
+      <td>Spoon</td>
+      <td>Small Plate</td>
+      <td>Centerpiece</td>
+      <td>Water Pitcher</td>
+    </tr>
+    <tr>
+      <th>Not Important</th>
+      <td>Cake</td>
+      <td>Spork</td>
+      <td>Bowl</td>
+      <td>Rose Petals</td>
+      <td>Placemats</td>
+    </tr>
   </table>
+  <h3>Let's make a kitchen table together!</h3>
   <svg>
-    <!-- Add your rectangles in here -->
+     <!-- Rounded corner rectangle -->
+    <rect id="table" x="0" width="300" height="150" rx="5"/>
+    <circle cx="45" cy="40" r="25" stroke="beige" stroke-width="10" fill="white"/>
+    <circle cx="145" cy="40" r="25" stroke="beige" stroke-width="10" fill="white"/>
+    <circle cx="245" cy="40" r="25" stroke="beige" stroke-width="10" fill="white"/>
+    <circle cx="60" cy="110" r="25" stroke="beige" stroke-width="10" fill="white"/>
+    <circle cx="160" cy="110" r="25" stroke="beige" stroke-width="10" fill="white"/>
+    <circle cx="260" cy="110" r="25" stroke="beige" stroke-width="10" fill="white"/>
+    <rect class="napkin" x="80" y="20" width="15" height="40" fill="white" />
+    <rect class="napkin" x="180" y="20" width="15" height="40" fill="white" />
+    <rect class="napkin" x="280" y="20" width="15" height="40" fill="white" />
+    <rect class="napkin" x="10" y="90" width="15" height="40" fill="white" />
+    <rect class="napkin" x="110" y="90" width="15" height="40" fill="white" />
+    <rect class="napkin" x="210" y="90" width="15" height="40" fill="white" />
   </svg>
+  <svg>
+    <path
+    d="M 10,30
+           A 20,20 0,0,1 50,30
+           A 20,20 0,0,1 90,30
+           Q 90,60 50,90
+           Q 10,60 10,30 z" fill ="red"/>
+  </svg>
+  <br>
+  <button>I AM A BUTTON!</button>
 </body>
 </html>
