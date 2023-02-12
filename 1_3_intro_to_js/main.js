@@ -30,3 +30,16 @@ function addButtonClick () {
 // call the function with an event listener on click
 counterButton.addEventListener("click", addButtonClick);
 
+// ARIANA
+// First create a variable that is the thing that will be clicked - it is ariana
+let ariana = document.getElementById("ariana")
+
+// Now let's make a function that will enlarge the width and length of the image
+function enlargeAri (){
+    let currentWidth = ariana.width;
+    let currentHeight = ariana.height;
+    ariana.width = currentWidth * 1.1;
+    ariana.height = currentHeight * 1.1;
+}
+
+ariana.addEventListener("click",enlargeAri);
