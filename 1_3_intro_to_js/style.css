@@ -21,3 +21,21 @@ p {
 section {
   padding: 2em 0;
 }
+
+#counterButton{
+font-family:'Courier New', Courier, monospace;
+color:antiquewhite;
+background-color: rgb(84, 84, 84);
+font-size: large;
+padding:10px;
+
+}
+
+#counterButton:hover{
+  background-color: black;
+  cursor: pointer;
+}
+
+div{
+  padding:10px;
+}
