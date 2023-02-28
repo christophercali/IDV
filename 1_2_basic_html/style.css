@@ -30,3 +30,8 @@ th{
 .topRow{
   background-color: rgb(184, 136, 136);
 }
+
+thead{
+  text-align: center;
+  font-size: 17px;
+}
