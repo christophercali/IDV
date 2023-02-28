@@ -25,13 +25,9 @@ td{
 th{
   padding:8px;
   background-color: rgb(184, 136, 136);
+  font-size: 17px;
 }
 
 .topRow{
   background-color: rgb(184, 136, 136);
-}
-
-thead{
-  text-align: center;
-  font-size: 17px;
 }
