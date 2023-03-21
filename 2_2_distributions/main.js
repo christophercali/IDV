@@ -16,6 +16,14 @@ d3.csv('../data/olympics.csv', d3.autoType).then(data => {
 const xScale = d3.scaleLinear()
     .domain([0, d3.max(data, d => d.total_participation)])
     .range([margin.left, width - margin.right])
+    
+    // I want the countries to be on the x-axis
+// const xScale = d3.scaleBand()
+//   .domain(data.map(d => d.countries))
+//   .range([margin.left, width - margin.right])
+//   .padding(0.1)
+// There is an issue here where it is not showing anything bc of categorical, will work on this at later time. 
+
 
 const yScale = d3.scaleLinear()
   .domain([0, d3.max(data, d => d.total_gold)]) // this is the total number of gold medals for each country 
