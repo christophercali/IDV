@@ -1,6 +1,6 @@
 // dataset is from kaggle
 // https://www.kaggle.com/datasets/meetnagadia/apple-stock-price-from-19802021
-// I will be using the daily close price for the line chart
+// I will be using the daily close price for the line chart 
 
 
 // constants and globals
