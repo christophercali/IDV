@@ -5,14 +5,13 @@ const width = window.innerWidth * 0.7,
   height = window.innerHeight * 0.7,
   margin = { top: 20, bottom: 60, left: 60, right: 40 },
   radius = 5,
-  color = "steelblue"
+  color = "gold"
 
 // loading data
 d3.csv('../data/olympics.csv', d3.autoType).then(data => {
   console.log(data)
 
 // scales
-
 const xScale = d3.scaleLinear()
     .domain([0, d3.max(data, d => d.total_participation)])
     .range([margin.left, width - margin.right])
