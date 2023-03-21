@@ -1,3 +1,5 @@
+// DATASET IS FROM: https://www.kaggle.com/datasets/surajjha101/countries-olympics-medals-since-1896?resource=download
+
 // Constants and globals
 const width = window.innerWidth * 0.7,
   height = window.innerHeight * 0.7,
@@ -6,18 +8,17 @@ const width = window.innerWidth * 0.7,
   color = "steelblue"
 
 // loading data
-d3.csv("../data/olympics_medals_country_wise.csv", d3.autoType).then(data => {
+d3.csv('../data/olympics.csv', d3.autoType).then(data => {
   console.log(data)
 
 // scales
-  // I want the countries to be on the x-axis
-const xScale = d3.scaleBand()
-  .domain(data.map(d => d.countries))
-  .range([margin.left, width - margin.right])
-  .padding(0.1)
+
+const xScale = d3.scaleLinear()
+    .domain([0, d3.max(data, d => d.total_participation)])
+    .range([margin.left, width - margin.right])
 
 const yScale = d3.scaleLinear()
-  .domain([0, d3.max(data, d => d.total_total)]) // this is the total number of medals for each country 
+  .domain([0, d3.max(data, d => d.total_gold)]) // this is the total number of gold medals for each country 
   .range([height - margin.bottom, margin.top])
 
 // HTML
@@ -46,32 +47,11 @@ svg.append("g")
  // circles
  const dot = svg
  .selectAll("circle")
- .data(data, d => d.country)
+ .data(data, d => d.total_participation)
  .join("circle")
- .attr("cx", d => xScale(d.countries) + xScale.bandwidth() / 2)
- .attr("cy", d => yScale(d.total_total))
- .attr("r", radius)
+ .attr("cx", d => xScale(d.total_participation))
+ .attr("cy", d => yScale(d.total_gold))
+ .attr("r", 5)
  .attr("fill", color)
 
 });
-
-  // // axis scales
-  // const xAxis = d3.axisBottom(xScale)
-  // svg.append("g")
-  // .attr("transform", `translate(0,${height - margin.bottom})`)
-  // .call(xAxis);
-  
-  // const yAxis = d3.axisLeft(yScale)
-  // svg.append("g")
-  //   .attr("transform", `translate(${margin.left},0)`)
-  //   .call(yAxis);
-
-  // // circles
-  // const dot = svg
-  //   .selectAll("circle")
-  //   .data(data, d => d.BioID) // second argument is the unique key for that row
-  //   .join("circle")
-  //   .attr("cx", d => xScale(d.envScore2020))
-  //   .attr("cy", d => yScale(d.ideologyScore2020))
-  //   .attr("r", radius)
-  //   .attr("fill", d => colorScale(d.Party))
