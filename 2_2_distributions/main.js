@@ -4,7 +4,7 @@
 const width = window.innerWidth * 0.7,
   height = window.innerHeight * 0.7,
   margin = { top: 20, bottom: 60, left: 60, right: 40 },
-  radius = 5, //commenting the radius out since we will change this based on a data point
+  radius = 5,
   color = "gold"
 
 // loading data
@@ -83,4 +83,20 @@ svg.append("text")
  .attr("opacity", 0.5) //opacity for better viewing
  .text(d => `${d.countries}: ${d.total_silver} total medals`) //text for tooltip
  //  .attr("r", 5) removing because adjusting based on total_total
+
+
+//  adding the names of the countries next to the circles - this works but looks crazy and messes up other labels
+// const labels = svg
+//   .selectAll("text")
+//   .data(data)
+//   .join("text")
+//   .attr("x", d => xScale(d.total_participation) + rScale(d.total_silver) + 5)
+//   .attr("y", d => yScale(d.total_gold))
+//   .attr("dy", "0.35em")
+//   .text(d => d.countries)
+//   .attr("font-size", "10px")
+//   .attr("fill", "black")
+//   .attr("opacity", 0.8)
+//   .attr("text-anchor", "start")
+
 });

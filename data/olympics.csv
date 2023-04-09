@@ -1,4 +1,4 @@
-countries ,ioc_code ,summer_participations,summer_gold,summer_silver,summer_bronze,summer_total,winter_participations,winter_gold,winter_silver,winter_bronze,winter_total,total_participation,total_gold,total_silver,total_bronze,total_total 
+countries,ioc_code ,summer_participations,summer_gold,summer_silver,summer_bronze,summer_total,winter_participations,winter_gold,winter_silver,winter_bronze,winter_total,total_participation,total_gold,total_silver,total_bronze,total_total 
 Afghanistan,(AFG),15,0,0,2,2,0,0,0,0,0,15,0,0,2,2
 Algeria,(ALG),14,5,4,8,17,3,0,0,0,0,17,5,4,8,17
 Argentina,(ARG),25,21,26,30,77,20,0,0,0,0,45,21,26,30,77
