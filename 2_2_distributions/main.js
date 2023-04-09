@@ -4,7 +4,7 @@
 const width = window.innerWidth * 0.7,
   height = window.innerHeight * 0.7,
   margin = { top: 20, bottom: 60, left: 60, right: 40 },
-  radius = 5,
+  radius = 5, //commenting the radius out since we will change this based on a data point
   color = "gold"
 
 // loading data
@@ -23,10 +23,13 @@ const xScale = d3.scaleLinear()
 //   .padding(0.1)
 // There is an issue here where it is not showing anything bc of categorical, will work on this at later time. 
 
-
 const yScale = d3.scaleLinear()
   .domain([0, d3.max(data, d => d.total_gold)]) // this is the total number of gold medals for each country 
   .range([height - margin.bottom, margin.top])
+
+const rScale = d3.scaleSqrt() // using square root scale for radius
+  .domain([0, d3.max(data, d => d.total_silver)]) // scaling radius by total number of silver
+  .range([0, 30])
 
 // HTML
 // svg
@@ -49,7 +52,23 @@ svg.append("g")
 const yAxis = d3.axisLeft(yScale)
 svg.append("g")
   .attr("transform", `translate(${margin.left},0)`)
-  .call(yAxis);
+  .call(yAxis)
+
+// Adding labels
+svg.append("text")
+  .attr("x", width / 2)
+  .attr("y", height - margin.bottom / 2)
+  .attr("font-size", "14px")
+  .attr("text-anchor", "middle")
+  .text("Participation");
+
+  svg.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("x", -height / 2)
+  .attr("y", margin.left / 2)
+  .attr("font-size", "14px")
+  .attr("text-anchor", "middle")
+  .text("Gold Medals");
 
  // circles
  const dot = svg
@@ -58,7 +77,10 @@ svg.append("g")
  .join("circle")
  .attr("cx", d => xScale(d.total_participation))
  .attr("cy", d => yScale(d.total_gold))
- .attr("r", 5)
+ .attr("r", d => rScale(d.total_silver)) // set radius based on total number of medals
  .attr("fill", color)
-
+ .attr("fill", color)
+ .attr("opacity", 0.5) //opacity for better viewing
+ .text(d => `${d.countries}: ${d.total_silver} total medals`) //text for tooltip
+ //  .attr("r", 5) removing because adjusting based on total_total
 });
