@@ -20,7 +20,7 @@ d3.csv('../data/squirrelActivities.csv', d3.autoType)
 // starting with YSCALE first which is now the categorical axis
 const yScale = d3.scaleBand()
     .domain(data.map(d=> d.activity))
-    .range([0, height]) // using height instead of width
+    .range([height, 0]) // using height instead of width
     .paddingInner(.2)
 
   // XSCALE for linear,count
