@@ -42,13 +42,21 @@ Promise.all([
   .data(heatExtremes)
   .join("circle")
   .attr("class", "heat")
-  .attr("r", d => d["Change in 95 percent Days"]/2) // using this to get the size of circle to be based on the actual change
-  .attr("fill", "orange")
+  .attr("r", d => Math.abs(d["Change in 95 percent Days"])/2) // using this to get the size of circle to be based on the actual change
+  .attr("fill", d => {
+    if (d["Change in 95 percent Days"] >= 0) {
+      return "orange"; //positive change
+    } else {
+      return "lime"; //negative change
+    }
+  })
   .attr("opacity", 0.7) // making somewhat transparent to see
   .attr("transform", d=> {
     const [x, y] = projection([d.Long, d.Lat]) //confirm that these are correct in each column
     return `translate(${x}, ${y})`
   })
+
+});
 
     // Commenting this out from the demo code but keeping here for reference
   // // drawing point for CUNY graduate center
@@ -64,7 +72,3 @@ Promise.all([
   //     const [x, y] = projection([d.longitude, d.latitude])
   //     return `translate(${x}, ${y})`
   //   })
-
-  
-
-});
