@@ -47,6 +47,8 @@ d3.csv('../data/AAPL.csv', d => {
    .attr("class", 'xLabel')
    .attr("transform", `translate(${width / 2}, ${35})`)
    .text("Date")
+   .attr("fill", "black")
+   .attr("font-size", "12px")
 
  const yAxis = d3.axisLeft(yScale)
 
@@ -60,6 +62,8 @@ d3.csv('../data/AAPL.csv', d => {
    .attr("transform", `translate(${-45}, ${height / 2})`)
    .attr("writing-mode", 'vertical-rl')
    .text("Close")
+   .attr("fill", "black")
+   .attr("font-size", "12px")
 
  // area/line generator function - Keeping for line
 //  const lineGen = d3.line() - changing this to areaGen
