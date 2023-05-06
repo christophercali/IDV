@@ -1,5 +1,5 @@
 body {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: 16px;
   padding: 1em;
 }
@@ -24,4 +24,51 @@ p {
 }
 html {
   background-image: url("Electric.png");;
+}
+
+.mapTakeaway {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.takeawayCard {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  background-color: #66ccff;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+.takeawayCard h2 {
+  font-size: 24px;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.takeawayCard p {
+  font-size: 14px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.buttonChange{
+  background-color: #66ccff;
+  margin: 10px;
+  font-size: 15px;
+  color: #ffffff;
+  border-radius: 5px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+}
+
+.buttonChangeDiv{
+  background-color: #66ccff;
+  margin: 10px;
 }
