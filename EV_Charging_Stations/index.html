@@ -11,36 +11,43 @@
   </head>
   <body>
       <header>
-        <h1>The Charge Forward: A Narrative on Electric Vehicle Charging Infrastructure in New York City</h1>
+        <h1 id="titleText">The Charge Forward: A Narrative on Electric Vehicle Charging Infrastructure in New York City</h1>
       </header>
       <main>
         <section>
           <div class="textContainer">
-            <div class="introP">
-              <p>The future of vehicular travel is rapidly moving towards electric-powered vehicles, thanks to a surge of interest and investment in sustainable transportation. The US government is actively supporting this transition through various incentives and regulations with the recent passing of the Bipartisan Infrastructure Bill and Inflation Reduction Act. Among these initiatives is an aim to build a national network of 500,000 EV chargers across America's highways and communities. A recent press release by the Biden-Harris administration sets a goal of making EVs (electric vehicles) account for at least 50% of new car sales by 2030. 
+            <div id="introP" class="textbox">
+              <p>The future of vehicular travel is rapidly moving towards electric-powered vehicles, thanks to a surge of interest and investment in sustainable transportation. The US government is actively supporting this transition through various incentives and regulations with the recent passing of the Bipartisan Infrastructure Bill and Inflation Reduction Act. A <a href="https://www.whitehouse.gov/briefing-room/statements-releases/2023/02/15/fact-sheet-biden-harris-administration-announces-new-standards-and-major-progress-for-a-made-in-america-national-network-of-electric-vehicle-chargers/" target="blank">recent press release by the Biden-Harris administration</a> sets a goal of making EVs (electric vehicles) account for at least 50% of new car sales by 2030. 
+            
+              <p>In New York City, the focus of this project, the local government is also taking steps to increase the uptake of EVs. Mayor Eric Adams <a href="https://www.theverge.com/2023/1/26/23573100/nyc-uber-lyft-electric-mayor-adams-2030" target="blank">recently announced at his State of the City Address that Uber and Lyft will be required to be zero-emission by 2030</a>, affecting an estimated 100,000 for-hire vehicles. Both Uber and Lyft are in support of this initiative and aim to have an all-electric fleet by 2030. The city's Department of Transportation (DOT) is <a href="https://www.nyc.gov/html/dot/html/motorist/electric-vehicles.shtml#/find/nearest" target="blank">also building its own network of EV charging stations</a>, including fast chargers, Level 2 chargers, and curbside charge points, with plans to equip 20% of all spaces in municipal public parking lots and garages with level 2 chargers by 2025. The Metropolitan Transportation Authority (MTA) is also <a href="https://new.mta.info/project/zero-emission-bus-fleet" target="blank">transitioning to a zero-emission bus fleet</a> by 2040.</p>
             </div>
-            <div class="nycP">
-              <p>In New York City, the focus of this project, the local government is also taking steps to increase the uptake of EVs. Mayor Eric Adams recently announced at his State of the City Address that Uber and Lyft will be required to be zero-emission by 2030, affecting an estimated 100,000 for-hire vehicles. Both Uber and Lyft are in support of this initiative. The city's Department of Transportation (DOT) is also building its own network of EV charging stations, including fast chargers, Level 2 chargers, and curbside charge points, with plans to equip 20% of all spaces in municipal public parking lots and garages with level 2 chargers by 2025. The Metropolitan Transportation Authority (MTA) is also transitioning to a zero-emission bus fleet by 2040.</p>
-            </div>
-            <!-- <img src="https://www.nyc.gov/html/dot/images/motorist/electric-vehicles-charging-station-bronx.jpg" alt="NYC EV Charging Station"> -->
-            <div class="chargersP">
-              <p>It's important to note that there are three different types of EV charging stations: Level 1, Level 2, and DC Fast Charging. Level 1 chargers take over 24 hours to provide a full charge, which makes them impractical for most purposes; Level 2 chargers provide a full charge in about 8 hours. DC Fast Chargers are the fastest option, taking 60-90 minutes for a full charge. For this analysis, we will focus on Level 2 and DC Fast Chargers since Level 1 chargers are inefficient.</p>
-            </div>
-            <div class="prefaceP">
-              <p>To better understand the EV charging landscape in NYC, I bring together Department of Energy Data on publicly available EV charging stations and census data. With this information, we can identify areas that are underserved by EV charging infrastructure and make potential recommendations for equitable development.</p>
+            <img src="https://www.athensford.com/static/dealer-9862/74097-WB-ATFO-ford-mustang-mach-e-select.png" alt="Ford Mustang Mach E">
+            <div id="chargersP" class="textbox">
+              <p>Though this current investment and commitment to expand our electric vehicle network is admirable, <strong>it is not quite enough</strong> given the volume and speed for which we want to roll them out. This project will demonstrate where our needs are and also give us information into how we can continue to <strong>roll out EV infrastructure in an equitable way</strong> within New York City.</p>
+              <ul>It's important to note that there are <a href="https://www.transportation.gov/rural/ev/toolkit/ev-basics/charging-speeds" target="blank">three different types of EV charging stations</a>: 
+                <li><strong>Level 1 Chargers:</strong> Through a common residential 120V AC outlet, takes over 24 hours to provide a full charge for an electric vehicle.</li>
+                <li><strong>Level 2 Chargers:</strong>Higher-rate AC charging through 240V (in residential applications) or 208V (in commercial applications) electrical service, common for home, workplace, and public charging. 4-10+ hours for full charge.</li>
+                <li><strong>DC Fast Chargers:</strong>Direct current fast charging (DCFC) equipment offers rapid charging and can get an EV charged up in 20 minutes to 1+ hour.</li>  
+                <p><strong>For this analysis, we will focus on Level 2 and DC Fast Chargers due to the inefficiency of Level 1 chargers.</strong></p>
+                </ul>
+                </div>
+              <div id="dataP" class="textbox">
+              <p>To better understand the EV charging landscape in NYC, I bring together <a href="https://afdc.energy.gov/fuels/electricity_locations.html#/find/nearest" target="blank">Department of Energy Data</a> on publicly available EV charging stations (as of 4.20.23) and <a href="https://www.nyc.gov/site/planning/planning-level/nyc-population/american-community-survey.page" target="blank">American Community Survey</a> data (5-Year: Estimate of Median Household Income, Race Breakdown, and Education Level). With this information, we can identify areas that are underserved by EV charging infrastructure and make potential recommendations for equitable development.</p>
             </div>
           </div>          
         </section>
         <section>
           <header>
-            <h2>Map</h2>
+            <h2>A Demographic Lens: Public Electric Vehicle Charging Stations in New York City</h2>
           </header>
           <div id="hover-content"> </div>
           <div id="container">
-            <button class="buttonChange" id="income"><div class="buttonChangeDiv">Show by Income Levels</div></button>
+            <button class="buttonChange" id="income"><div class="buttonChangeDiv">Show by Income Level</div></button>
             <button class="buttonChange" id="race"><div class="buttonChangeDiv">Show by Race</div></button>
+            <button class="buttonChange" id="race"><div class="buttonChangeDiv">Show by Education Level</div></button>
             <!-- The map will be in this container -->
           </div>
+          <div id="takeaways"><h3>Takeaways and Further Questions</h3></div>
           <div id="mapTakeaway">
             <div class="takeawayCard">
               <h2>Title 1</h2>
@@ -59,12 +66,18 @@
               <p>Some additional text goes here.</p>
             </div>
           </div>
-          <div id="takeaways"><h3>Takeaways</h3></div>
+          
           </section>
-        </section>
+
+          <section>
+            <h2>Find How Many Chargers Are in Your Area</h2>
+            <div id="findContainer">
+            </div>
+          </section>
+
         <section>
           <header>
-            <h2>Bar Chart</h2>
+            <h2>The FAST Chargers: Where are they?</h2>
           </header>
           <div id="barChartContainer">
             <!-- The bar chart will be in this container -->

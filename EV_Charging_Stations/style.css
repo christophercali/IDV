@@ -9,6 +9,10 @@ h1 {
   margin: 0.25em 0;
 }
 
+#titleText{
+  margin: 20px;
+}
+
 h2 {
   font-size: 2em;
   margin: 0.25em 0;
@@ -26,11 +30,23 @@ html {
   background-image: url("Electric.png");;
 }
 
+#hover-content {
+  font-size: large;
+}
+
 .textContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #66ccff;
+  border-radius: 15px;
+  margin: 15px;
+}
+
+.textbox{
+  padding: 20px;
+  margin-left: 15px;
 }
 
 #mapTakeaway {
@@ -55,7 +71,6 @@ html {
 }
 
 #takeaways {
-  align-content: center;
   border-radius: 15px;
   padding: 15px;
   font-size: 15px;
