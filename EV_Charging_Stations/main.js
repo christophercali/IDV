@@ -21,9 +21,11 @@ let state = {
  hover: {
    latitude: null,
    longitude: null,
-   ntaname: null,
+   nta2020: null,
    ntacode: null,
-   boro_name: null
+   ntaname: null,
+   boroname: null,
+   count: null,
  },
 };
 
@@ -32,15 +34,25 @@ let state = {
 * Using a Promise.all([]), we can load more than one dataset at a time
 * */
 Promise.all([
-  d3.json("neighborhoodsnyc.geojson"),
+  d3.json("NTAsUpdated.geojson"),
+  d3.json("us-state-boundaries.geojson"),
   d3.csv("evstations420.csv"),
-  d3.csv("ACSDATASET-NYC.csv")
-]).then(([geojson, stations, acs]) => {
+  d3.csv("ACS-Demographic-Social-Economic.csv")
+]).then(([geojson, geojsonUSA, stations, acs]) => {
+  // Initialize properties of each added feature to 0
+  geojson.features.forEach(feature => {
+    feature.properties.count = 0;
+    feature.properties.CountDC = 0;
+    feature.properties.LevelTwo = 0;
+    feature.properties.chargers = 0;
+  });
   state.geojson = geojson;
+  state.geojsonUSA = geojsonUSA;
   state.stations = stations;
   state.acs = acs;
   console.log("state: ", state);
   init();
+  // init2();
 });
 
   /**
@@ -53,27 +65,46 @@ function init() {
  const projection = d3.geoMercator().fitSize([width, height], state.geojson);
  const path = d3.geoPath().projection(projection);
 
+//  This is adding to the count of the stations in each area
+ state.stations.forEach(station => {
+  const point = [station.Longitude, station.Latitude];
+
+  state.geojson.features.forEach(feature => {
+    if (d3.geoContains(feature, point)) {
+      feature.properties.count++;
+      feature.properties.CountDC += parseInt(station["EV DC Fast Count"]);
+      feature.properties.LevelTwo += parseInt(station["EV Level2 EVSE Num"]);
+      feature.properties.chargers += parseInt(station["EV DC Fast Count"]);
+      feature.properties.chargers += parseInt(station["EV Level2 EVSE Num"])
+    }
+  });
+});
+
+//This is to 
+
  // create an svg element in our main `d3-container` element
  svg = d3
    .select("#container")
    .append("svg")
    .attr("width", width)
    .attr("height", height);
-   
+
    svg
-   .selectAll(".ntaname")
-   // all of the features of the geojson, meaning all the zip codes as individuals
+   .selectAll(".nta2020")
+   // all of the features of the geojson, meaning all the neighborhoods as individuals
    .data(state.geojson.features)
    .join("path")
    .attr("d", path)
-   .attr("class", "ntaname")
+   .attr("class", "nta2020")
    .attr("fill", "black")
    .attr("fill", d => d.properties.color)
    .attr("stroke", "gray")
    .on("mouseover", (mouseEvent, d) => {
      // when the mouse rolls over this feature, do this
-     state.hover["ntaname"] = d.properties.ntaname;
-     draw(); // re-call the draw function when we set a new hoveredZipcode
+     state.hover["Neighborhood"] = d.properties.ntaname;
+     state.hover["Borough"] = d.properties.boroname;
+     state.hover["Count of Public EV Charging Locations"] = d.properties.count === 0 ? "None" : d.properties.count;
+     draw(); // re-call the draw function when we set a new
    });
 
 const stationLocations = state.stations.map(d => [d.Longitude, d.Latitude]);
@@ -94,24 +125,12 @@ svg
   .join("circle")
   .attr("cx", d => projectPoint(d[0], d[1])[0])
   .attr("cy", d => projectPoint(d[0], d[1])[1])
-  .attr("r", 3)
+  .attr("r", 2)
   .attr("fill", "yellow");
-
-
- // EXAMPLE 2: going from x, y => lat-long
- // this triggers any movement at all while on the svg
- svg.on("mousemove", (e) => {
-   // we can d3.pointer to tell us the exact x and y positions of our cursor
-   const [mx, my] = d3.pointer(e);
-   // projection can be inverted to return [lat, long] from [x, y] in pixels
-   const proj = projection.invert([mx, my]);
-   state.hover["longitude"] = proj[0];
-   state.hover["latitude"] = proj[1];
-   draw();
- });
 
  draw(); // calls the draw function
 }
+
 
 /**
 * DRAW FUNCTION
@@ -120,9 +139,13 @@ svg
 function draw() {
 
   // Defining the colorscale since this is being redrawn on the click below
-  const colorScale = d3.scaleSequential()
-  .domain(d3.extent(state.acs, d => +d.MedianHHIncome))
+  const colorScaleIncome = d3.scaleSequential()
+  .domain(d3.extent(state.acs, d => +d.MdHHIncE))
   .interpolator(d3.interpolateGreens);
+
+  const colorScaleRace = d3.scaleSequential()
+  .domain(d3.extent(state.acs, d => +d.WtNHPWhite))
+  .interpolator(d3.interpolatePurples);
 
  // return an array of [key, value] pairs
  hoverData = Object.entries(state.hover);
@@ -140,31 +163,35 @@ function draw() {
           : null // otherwise, show nothing
     );
 
+
     // THE BUTTON CLICKS
     function income() {
-      const joinedData = state.geojson.features.map(feature => {
-        const acsData = state.acs.find(d => d.GeoID === feature.properties.ntacode);
-        return { ...feature, acsData };
+      const joinedDataIncome = state.geojson.features.map(feature => {
+        const acsDataIncome = state.acs.find(d => d.GeoID === feature.properties.nta2020);
+        return { ...feature, acsDataIncome };
       });
-    
+    console.log(joinedDataIncome);
       svg
-        .selectAll(".ntaname")
-        .data(joinedData)
-        .attr("fill", d => colorScale(+d.acsData.MedianHHIncome));
+        .selectAll(".nta2020")
+        .data(joinedDataIncome)
+        .attr("fill", d => colorScaleIncome(d.acsData.MdHHIncE));
+        console.log(joinedDataIncome)
     }
 
     function race() {
-      const joinedData = state.geojson.features.map(feature => {
-        const acsData = state.acs.find(d => d.GeoID === feature.properties.ntacode);
-        return { ...feature, acsData };
+      const joinedDataRace = state.geojson.features.map(feature => {
+        const acsDataRace = state.acs.find(d => d.GeoID === feature.properties.nta2020);
+        console.log(acsDataRace)
+        return { ...feature, acsDataRace };
       });
     
       svg
-        .selectAll(".ntaname")
-        .data(joinedData)
-        .attr("fill", d => colorScale(+d.acsData.WhiteP));
+        .selectAll(".nta2020")
+        .data(joinedDataRace)
+        .attr("fill", d => colorScaleRace(+d.acsData.WtNHPWhite));
     }
-  // When the button is clicked, it calls the function to change based on median income
+// these will call the above functions on the clicks
     d3.select("#income").on("click", income);
     d3.select("#race").on("click", race);
-}
+
+  }
