@@ -3,7 +3,7 @@
 // Constants and globals
 const width = window.innerWidth * 0.7,
   height = window.innerHeight * 0.7,
-  margin = { top: 20, bottom: 60, left: 60, right: 40 },
+  margin = {top: 20, bottom: 60, left: 60, right: 40},
   radius = 5,
   color = "gold"
 
@@ -24,12 +24,12 @@ const xScale = d3.scaleLinear()
 // There is an issue here where it is not showing anything bc of categorical, will work on this at later time. 
 
 const yScale = d3.scaleLinear()
-  .domain([0, d3.max(data, d => d.total_gold)]) // this is the total number of gold medals for each country 
+  .domain([0, d3.max (data, d => d.total_gold)]) // this is the total number of gold medals for each country 
   .range([height - margin.bottom, margin.top])
 
 const rScale = d3.scaleSqrt() // using square root scale for radius
-  .domain([0, d3.max(data, d => d.total_silver)]) // scaling radius by total number of silver
-  .range([0, 30])
+  .domain([0, d3.max(data, d => d.total_silver)]) // scaling radius by total number of summer golds
+  .range([0, 20])
 
 // HTML
 // svg
@@ -77,7 +77,7 @@ svg.append("text")
  .join("circle")
  .attr("cx", d => xScale(d.total_participation))
  .attr("cy", d => yScale(d.total_gold))
- .attr("r", d => rScale(d.total_silver)) // set radius based on total number of medals
+ .attr("r", d => rScale(d.total_silver)) // set radius based on total silver
  .attr("fill", color)
  .attr("fill", color)
  .attr("opacity", 0.5) //opacity for better viewing
