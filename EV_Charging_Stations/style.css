@@ -1,3 +1,4 @@
+/* using font from google */
 body {
   font-family: "Raleway", sans-serif;
   font-size: 16px;
@@ -33,7 +34,7 @@ html {
 #hover-content {
   font-size: large;
 }
-
+/* using flex to nicely position elements */
 .textContainer {
   display: flex;
   flex-direction: column;

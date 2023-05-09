@@ -55,7 +55,6 @@ if (acsData) {
   state.geojsonUSA = geojsonUSA;
   state.stations = stations;
   state.acs = acs;
-  console.log("state: ", state);
   init();
 });
 
@@ -87,15 +86,12 @@ function init() {
     }
   });
 });
-
-
  // creating an svg element in our main container
  svg = d3
    .select("#container")
    .append("svg")
    .attr("width", width)
    .attr("height", height);
-
   // Getting the polygons drawn for the city
    svg
    .selectAll(".nta2020")
@@ -121,7 +117,6 @@ function init() {
 
      draw(); // re-call the draw function for the tooltip to work
    });
-
 // Setting up for the points of stations to be drawn using lat long
 const stationLocations = state.stations.map(d => [d.Longitude, d.Latitude]);
 
@@ -132,14 +127,12 @@ function projectPoint(longitude, latitude) {
   const [x, y] = pointProjection([longitude, latitude]);
   return [x, y];
 }
-
 // usng this code to pull out those locations that do not intersect with the polygons
 const filteredLocations = stationLocations.filter(loc => {
   return state.geojson.features.some(feature => {
     return d3.geoContains(feature, loc);
   });
 });
-
 // drawing points for each location based on data set
 svg
   .append("g")
@@ -201,7 +194,6 @@ function draw() {
         const acsDataIncome = state.acs.find(d => d.GeoID === feature.properties.nta2020);
         return { ...feature, acsDataIncome };
       });
-    console.log(joinedDataIncome);
       svg
         .selectAll(".nta2020")
         .data(joinedDataIncome)
@@ -257,7 +249,6 @@ legend.append("svg:image")
 legend.transition()
 .duration(1000)
 .style("opacity", 1);
-      
     }
 
     function education() {
@@ -295,5 +286,4 @@ legend.transition()
 d3.select("#income").on("click", income);
 d3.select("#race").on("click", race);
 d3.select("#education").on("click", education);
-
   }
