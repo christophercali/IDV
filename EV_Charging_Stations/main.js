@@ -29,10 +29,12 @@ let state = {
 Promise.all([
   d3.json("NTAsUpdated.geojson"),
   d3.json("us-state-boundaries.geojson"), //no longer need the state boundaries but keeping if I want to use later
+  //I had originally intended to have this go behind NYC so that the long island points would show, but I think it was distracting
   d3.csv("evstations420.csv"),
   d3.csv("ACS-Demographic-Social-Economic.csv")
 ]).then(([geojson, geojsonUSA, stations, acs]) => {
   // adding these additional properties for the init() function
+  // I want to access numbers for this later on
   geojson.features.forEach(feature => {
     feature.properties.count = 0;
     feature.properties.CountDC = 0;
@@ -109,17 +111,18 @@ function init() {
      // when the mouse rolls over this feature, do this
      state.hover["Neighborhood"] = d.properties.ntaname;
      state.hover["Borough"] = d.properties.boroname;
-     state.hover["Count of Public EV Charging Locations"] = d.properties.count === 0 ? "None" : d.properties.count;
-
+     state.hover["Count of Public EV Charging Locations"] = d.properties.count === 0 ? "None" : d.properties.count; //want it to say none if it has 0
+// each charging location has multiple chargers that people can use, but I want this above to correspond with the points on the map
       // find the corresponding row in the acs dataset based on GeoID
       const acsRow = state.acs.find(row => row.GeoID === d.properties.nta2020);
-      state.hover["Median Income"] = acsRow.MdHHIncE;
-      state.hover["Percent Caucasian"] = acsRow.WtNHPWhite;
-      state.hover["Percent with Bachelors or Higher"] = acsRow.EA_BachandHigherDHP;
+      state.hover["Median Income"] = acsRow.MedIncomenum;
+      state.hover["Percent BIPOC Population"] = acsRow.PBIPOC;
+      state.hover["Percent with Bachelors or Higher"] = acsRow.BachandHigher;
 
-     draw(); // re-call the draw function
+     draw(); // re-call the draw function for the tooltip to work
    });
 
+// Setting up for the points of stations to be drawn using lat long
 const stationLocations = state.stations.map(d => [d.Longitude, d.Latitude]);
 
 const pointProjection = d3.geoMercator().fitSize([width, height], state.geojson);
@@ -137,6 +140,7 @@ const filteredLocations = stationLocations.filter(loc => {
   });
 });
 
+// drawing points for each location based on data set
 svg
   .append("g")
   .attr("class", "stationPoints")
@@ -148,18 +152,6 @@ svg
   .attr("r", 1.5)
   .attr("stroke", "black")
   .attr("fill", "yellow");
-
-  // saving this code here so that if I want the other locations that show up in long island
-// svg
-//   .append("g")
-//   .attr("class", "stationPoints")
-//   .selectAll("circle")
-//   .data(stationLocations)
-//   .join("circle")
-//   .attr("cx", d => projectPoint(d[0], d[1])[0])
-//   .attr("cy", d => projectPoint(d[0], d[1])[1])
-//   .attr("r", 1.5)
-//   .attr("fill", "yellow");
 
  draw(); // calls the draw function
 }
@@ -185,10 +177,10 @@ function draw() {
   .domain(d3.extent(state.acs, d=> +d.EA_BachandHigherDHP))
   .interpolator(d3.interpolateBlues);
   
-
+//This part will give the tooltip values based on what is above in itit()
  // return an array of [key, value] pairs
  hoverData = Object.entries(state.hover);
-
+//selecting the hover content container for this purpose
   d3.select("#hover-content")
     .selectAll("div.row")
     .data(hoverData)
@@ -198,12 +190,12 @@ function draw() {
       d =>
         // each d is [key, value] pair
         d[1] // check if value exist
-          ? `${d[0]}: ${d[1]}` // if they do, fill them in
+          ? `${d[0]}: <span style="font-weight:bold">${d[1]}</span>` // if they do, fill them in -- also added code here so that it makes them bold
           : "Data not available" // otherwise, show nothing
     );
 
     // THE BUTTON CLICKS
-
+    // Creating three different functions for the 3 buttons in my HTML Code
     function income() {
       const joinedDataIncome = state.geojson.features.map(feature => {
         const acsDataIncome = state.acs.find(d => d.GeoID === feature.properties.nta2020);
@@ -218,9 +210,6 @@ function draw() {
         .attr("fill", d => {
           if (d.acsDataIncome) {
             return colorScaleIncome(d.acsDataIncome.MdHHIncE);} 
-            else {
-            return "black"; // setting a default color for missing data
-          }
         });
 // adding legend that I created in canva
 // putting the image in a g tag so that I can use the d3 transition
@@ -232,13 +221,13 @@ function draw() {
         .attr("width", 200)
         .attr("height", 100)
         .attr("xlink:href", "Inc.png");
-      
+      //fade in
       legend.transition()
         .duration(1000)
         .style("opacity", 1);
 
     }
-
+// same function as above for race
     function race() {
       const joinedDataRace = state.geojson.features.map(feature => {
         const acsDataRace = state.acs.find(d => d.GeoID === feature.properties.nta2020);
@@ -253,9 +242,6 @@ function draw() {
         .attr("fill", d => {
           if (d.acsDataRace) {
             return colorScaleRace(d.acsDataRace.WtNHPWhite);} 
-            else {
-            return "black"; // seting default color for missing data
-          }
         });
 // adding legend that I created in canva
 // putting the image in a g tag so that I can use the d3 transition
@@ -288,9 +274,6 @@ legend.transition()
         .attr("fill", d => {
           if (d.acsDataEducation) {
             return colorScaleEducation(d.acsDataEducation.EA_BachandHigherDHP);} 
-            else {
-            return "black"; // setting default color for missing data
-          }
         });
 // adding legend that I created in canva
 // putting the image in a g tag so that I can use the d3 transition
