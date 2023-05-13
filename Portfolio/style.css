@@ -1,0 +1,50 @@
+/* using font from google */
+body {
+  font-family: "Raleway", sans-serif;
+  padding: 1em;
+}
+
+html {
+  background-color: black;
+}
+
+body {
+  background-color: black;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.portfolio-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  background-color: #f4f4f4;
+  border-radius: 20px;
+  margin: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.portfolio-container h2 {
+  margin-top: 0;
+}
+
+.portfolio-container img {
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.portfolio-container p {
+  margin-top: 20px;
+  text-align: justify;
+}
+
+#svgHeader {
+  width: 50%;
+}

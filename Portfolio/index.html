@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
+    <title>A Portfolio by Christopher Cali</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+      <header>
+<img id="svgHeader" src="PortfolioHeader.svg">        
+      </header>
+      <main>
+        <body>
+          <div class="main-container">
+            <div class="portfolio-container">
+              <h2>The Charge Forward: A Narrative on Electric Vehicle Charging Infrastructure in New York City</h2>
+              <a href="https://christophercali.github.io/IDV/EV_Charging_Stations/index.html">
+                <img src="map.png" alt="EV Map">
+              </a>
+              <p><strong>Abstract: </strong>The transition to electric vehicles (EVs) is gaining momentum across the US with the passing of the Inflation Reduction Act and recent commitments by municipal governments. Access to EV charging stations is crucial to ensure a smooth rollout. With that said, the task of providing access to charging stations is more challenging in cities like New York where many individuals live in apartment complexes or public housing. This narrative visualization project examines the distribution of EV charging stations in New York City and explores the relationship between the location of charging stations and demographic data from the census. The project uses data from the Department of Energy to create a layered map of charging station locations, overlaid with demographic information for each neighborhood in NYC. This map will help to determine whether there is an equitable distribution of charging stations across the city and identify areas that are lacking in EV infrastructure. By highlighting areas that are impacted and examining the relationship between charging stations and demographic data, this project aims to contribute to the ongoing discussions around equitable access to EV infrastructure.</p>
+            <p><strong>Note on the Data Sets Used:</strong> I used the Department of Energy Data Set on <a href="https://afdc.energy.gov/fuels/electricity_locations.html#/find/nearest" target="blank">Public Electric Vehicle Charging Stations</a> in New York State. I then further cleaned the data sert in Excel removing all non-NYC locations (by zip code). For the Census data, I wanted median household income, race data, and education level information. The NYC Department of City Planning had already created <a href="https://www.nyc.gov/site/planning/planning-level/nyc-population/american-community-survey.page" target="blank">their own data sets</a> that had information from the American Community Survey (ACS) by Neighborhood Tabulation Area. I pulled the relevant columns from those data sets and joined them to get the demographic data I wanted for the map. Since the Census data was going to be by Neighborhood, I pulled the polygons from NYC Open Data so that they could be drawn.</p>
+              <a href="https://docs.google.com/document/d/1cc961LIrWlMx5ntDGDn9CCrGc2R7yRb4vqwu8LpzBqI/edit?usp=sharing" target="blank">Read my reflection on this project here.</a>
+            </div>
+            <div class="portfolio-container">
+              <h2>Title 2</h2>
+              <a href="#">
+                <img src="image2.jpg" alt="Image 2">
+              </a>
+              <p><strong>Abstract: </strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis orci sed dui fermentum faucibus. Fusce id blandit urna. In eu magna libero. Pellentesque iaculis, nulla sit amet malesuada dapibus, metus magna tincidunt nisi, eu vulputate purus metus et odio.</p>
+              <p><strong>Note on the Data Sets Used: </strong></p>
+              <a href="https://docs.google.com/document/d/1cc961LIrWlMx5ntDGDn9CCrGc2R7yRb4vqwu8LpzBqI/edit?usp=sharing" target="blank">Read my reflection on this project here.</a>
+            </div>
+            </div>
+          </div>
+        </body>
+      </main>
+    </body>
+    <script src="../lib/d3.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
