@@ -2,7 +2,6 @@
 // https://www.kaggle.com/datasets/meetnagadia/apple-stock-price-from-19802021
 // I will be using the daily close price for the line chart 
 
-
 // constants and globals
  const width = window.innerWidth * 0.7,
  height = window.innerHeight * 0.7,
@@ -87,3 +86,13 @@ d3.csv('../data/AAPL.csv', d => {
   //  .attr("d", d => lineGen(d))
    .attr("d", d => areaGen(d))
 });
+
+// svg.selectAll(".area")
+// .on("mouseover", function (event, d) {
+// // show tooltip
+// d3.select("#tooltip")
+// .style("display", "block")
+// .html(Date: ${d3.timeFormat("%Y-%m-%d")(d[0].Date)} <br>Close: $${d[d.length - 1].Close.toFixed(2)})
+// .style("left", event.pageX + "px")
+// .style("top", event.pageY + "px");
+// });
