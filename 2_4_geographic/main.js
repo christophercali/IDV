@@ -81,6 +81,14 @@ function init() {
       draw();
     });
 
+    //adding legend
+    svg
+    .append("image")
+    .attr("xlink:href", "legend.png") // Replace with the actual path to your image
+    .attr("x", margin.left)
+    .attr("y", margin.top)
+    .attr("width", 150)
+
   draw();
 }
 

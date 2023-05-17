@@ -99,4 +99,12 @@ svg.append("text")
 //   .attr("opacity", 0.8)
 //   .attr("text-anchor", "start")
 
+ //adding legend
+ svg
+ .append("image")
+ .attr("xlink:href", "legend.png") // Replace with the actual path to your image
+ .attr("x", width/2)
+ .attr("y", margin.top)
+ .attr("width", 200)
+
 });
