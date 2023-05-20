@@ -102,7 +102,7 @@ svg.append("text")
  //adding legend
  svg
  .append("image")
- .attr("xlink:href", "legend.png") // Replace with the actual path to your image
+ .attr("xlink:href", "legend.png")
  .attr("x", width/2)
  .attr("y", margin.top)
  .attr("width", 200)

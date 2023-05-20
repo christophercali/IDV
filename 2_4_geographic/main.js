@@ -84,27 +84,10 @@ function init() {
     //adding legend
     svg
     .append("image")
-    .attr("xlink:href", "legend.png") // Replace with the actual path to your image
+    .attr("xlink:href", "legend.png")
     .attr("x", margin.left)
     .attr("y", margin.top)
     .attr("width", 150)
 
   // draw();
 }
-
-// function draw() {
-//   const hoverData = Object.entries(state.hover["Change in 95 percent Days"]);
-  
-//   // Selecting the hover content container for this purpose
-//   d3.select("#hover-content")
-//     .selectAll("div.row")
-//     .data(hoverData)
-//     .join("div")
-//     .attr("class", "row")
-//     .html(d => 
-//       // each d is [key, value] pair
-//       d[1] // check if value exists
-//         ? `${d[0]}: <span style="font-weight:bold">${d[1]}</span>` // if they do, fill them in -- also added code here so that it makes them bold
-//         : "Data not available" // otherwise, show nothing
-//     );
-// }
